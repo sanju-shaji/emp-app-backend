@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            padding: 20px;
+            width: 250px;
+            text-align: center;
+        }
+        .card h3 {
+            margin: 10px 0;
+        }
+        .card button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-update {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+        form {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee List</h1>
+    <form action="/employees" method="POST" style="text-align: center;">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="position" placeholder="Position" required>
+        <input type="number" name="salary" placeholder="Salary" required>
+        <button type="submit">Add Employee</button>
+    </form>
+    <div class="container">
+        <% employees.forEach(employee => { %>
+            <div class="card">
+                <h3><%= employee.Name></h3>
+                <p> employeeDesignation: <%= employee.Desgination %></p>
+                <p> employeeLocation: $<%= employee.Location %></p>
+                <p>salary: $<%= employee.salary></p>
+                <form action="/employees/update/<%= employee._id %>" method="GET">
+                    <button type="submit" class="btn-update">Update</button>
+                </form>
+                <form action="/employees/delete/<%= employee._id %>" method="POST">
+                    <button type="submit" class="btn-delete">Delete</button>
+                </form>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>
